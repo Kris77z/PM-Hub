@@ -9,10 +9,10 @@ const Container = memo<PropsWithChildren>(({ children }) => {
 
   return (
     <Flexbox
-      height={'100%'}
+      height={'100vh'}
       style={{
         background: theme.colorBgContainer,
-        overflow: 'hidden',
+        overflow: 'auto',
         position: 'relative',
       }}
       width={'100%'}

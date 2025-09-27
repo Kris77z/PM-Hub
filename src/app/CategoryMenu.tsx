@@ -9,6 +9,7 @@ const useStyles = createStyles(({ css, prefixCls }) => {
   return {
     menu: css`
       padding: 0 !important;
+      border-right: none !important;
       .${prefixCls}-menu-item {
         display: flex;
         gap: 4px;

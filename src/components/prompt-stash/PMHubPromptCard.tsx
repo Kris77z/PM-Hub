@@ -2,12 +2,13 @@ import { Icon, Tag } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { ClockIcon, StarIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import urlJoin from 'url-join';
 import Image from 'next/image';
 
 import { ExtendedPromptTemplate } from './PromptCard';
+import { getToolDoc } from '@/data/toolDocs';
 
 const useStyles = createStyles(({ css, token }) => {
   return {
@@ -63,23 +64,22 @@ const useStyles = createStyles(({ css, token }) => {
     `,
     description: css`
       padding: 16px 20px;
-      height: 120px; // 固定描述区域高度
+      min-height: 130px;
       display: flex;
       flex-direction: column;
     `,
     desc: css`
       font-size: 14px;
       color: ${token.colorTextSecondary};
-      line-height: 1.5;
+      line-height: 1.6;
       margin: 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 63px; // 固定描述文本高度 (3行 * 21px)
     `,
     footer: css`
-      padding: 16px 20px;
+      padding: 12px 20px;
       background: ${token.colorFillQuaternary};
       border-top: 1px solid ${token.colorBorderSecondary};
       display: flex;
@@ -89,7 +89,7 @@ const useStyles = createStyles(({ css, token }) => {
     stats: css`
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 8px;
       font-size: 12px;
       color: ${token.colorTextTertiary};
     `,
@@ -122,11 +122,11 @@ const PMHubPromptCard = memo<PMHubPromptCardProps>(
     const { styles, theme } = useStyles();
     const router = useRouter();
     const link = urlJoin('/', template.id);
+    const toolDoc = useMemo(() => getToolDoc(template.id), [template.id]);
 
     const handleClick = () => {
       router.push(link);
     };
-
 
     return (
       <div className={styles.container} onClick={handleClick}>
@@ -155,9 +155,7 @@ const PMHubPromptCard = memo<PMHubPromptCardProps>(
 
         {/* 描述区域 */}
         <div className={styles.description}>
-          <p className={styles.desc}>
-            {template.description}
-          </p>
+          <p className={styles.desc}>{toolDoc?.description ?? template.description}</p>
           
           {/* 标签 */}
           {template.tags && template.tags.length > 0 && (
@@ -185,15 +183,15 @@ const PMHubPromptCard = memo<PMHubPromptCardProps>(
         <div className={styles.footer}>
           <div className={styles.stats}>
             <div className={styles.stat}>
-              <Icon icon={StarIcon} size={12} />
+              <Icon icon={StarIcon} size={10} />
               <span>0</span>
             </div>
             <div className={styles.stat}>
-              <Icon icon={ClockIcon} size={12} />
+              <Icon icon={ClockIcon} size={10} />
               <span>AI 工具</span>
             </div>
           </div>
-          <Tag 
+          <Tag
             style={{
               fontSize: '11px',
               background: theme.colorPrimaryBg,

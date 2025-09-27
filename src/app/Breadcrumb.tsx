@@ -1,6 +1,5 @@
 'use client';
 
-import { CopyButton } from '@lobehub/ui';
 import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import { useTheme } from 'antd-style';
 import Link from 'next/link';
@@ -27,15 +26,6 @@ const Breadcrumb = memo<{ identifier: string }>(({ identifier }) => {
               }}
             >
               {identifier}
-              {identifier !== '创作' && (
-                <CopyButton
-                  content={identifier}
-                  size={{
-                    blockSize: 18,
-                    size: 12,
-                  }}
-                />
-              )}
             </Flexbox>
           ),
         },

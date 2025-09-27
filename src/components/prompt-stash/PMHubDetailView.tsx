@@ -1,11 +1,60 @@
-import { Avatar, Button, Collapse, Icon, Tooltip } from '@lobehub/ui';
+import { Avatar, Collapse, Icon, Tooltip } from '@lobehub/ui';
+import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import { ClockIcon, CoinsIcon, TagIcon } from 'lucide-react';
 import React, { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import Image from 'next/image';
 
+import { getToolDoc } from '@/data/toolDocs';
 import { ExtendedPromptTemplate } from './PromptCard';
+
+const renderUsageList = (usages?: string[]) => {
+  if (!usages || usages.length === 0) return null;
+
+  return (
+    <ul
+      style={{
+        paddingLeft: 20,
+        margin: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
+      }}
+    >
+      {usages.map((usage, index) => (
+        <li key={index}>{usage}</li>
+      ))}
+    </ul>
+  );
+};
+
+const renderToolDoc = (toolId: string) => {
+  const doc = getToolDoc(toolId);
+
+  if (!doc) {
+    return (
+      <p style={{ margin: 0, color: 'var(--colorTextSecondary)' }}>
+        暂无详细使用场景介绍
+      </p>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        margin: 0,
+        color: 'var(--colorTextSecondary)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 12,
+      }}
+    >
+      <p style={{ margin: 0 }}>{doc.description}</p>
+      {renderUsageList(doc.usages)}
+    </div>
+  );
+};
 
 const useStyles = createStyles(({ css, token }) => {
   return {
@@ -79,7 +128,7 @@ const PMHubDetailView = memo<PMHubDetailViewProps>(({ template, onStartChat }) =
               </h1>
             </Flexbox>
             <p className={styles.desc} style={{ margin: 0 }}>
-              {template.description}
+              {getToolDoc(template.id)?.description ?? template.description}
             </p>
           </Flexbox>
         </Flexbox>
@@ -141,11 +190,7 @@ const PMHubDetailView = memo<PMHubDetailViewProps>(({ template, onStartChat }) =
               expandIconPosition={'end'}
               items={[
                 {
-                  children: (
-                    <p style={{ margin: 0, color: theme.colorTextSecondary }}>
-                      {template.description}
-                    </p>
-                  ),
+                  children: renderToolDoc(template.id),
                   key: 'summary',
                   label: '你可以使用该工具做什么？',
                 },

@@ -21,7 +21,7 @@ const Layout = ({ children }: PropsWithChildren) => {
         {/* 主要内容区域 */}
         <Flexbox
           flex={1}
-          gap={24}
+          gap={0}
           horizontal
           style={{
             position: 'relative',
@@ -37,7 +37,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           )}
 
           {/* 右侧内容区域 */}
-          <Flexbox flex={1} gap={16}>
+          <Flexbox flex={1} gap={16} style={{ marginLeft: 24 }}>
             {children}
           </Flexbox>
         </Flexbox>
