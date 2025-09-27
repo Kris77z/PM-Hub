@@ -1,0 +1,10 @@
+{
+  "gemini": "google-gemini",
+  "claude": "anthropic-claude",
+  "openai": "openai",
+  "figma": "figma",
+  "dify": "dify",
+  "cursor": "cursor",
+  "ai-studio": "ai-studio",
+  "manus": "manus"
+}
