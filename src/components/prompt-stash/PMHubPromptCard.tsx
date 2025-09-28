@@ -64,7 +64,7 @@ const useStyles = createStyles(({ css, token }) => {
     `,
     description: css`
       padding: 16px 20px;
-      min-height: 130px;
+      height: 140px; // 固定描述区域高度
       display: flex;
       flex-direction: column;
     `,
@@ -77,6 +77,8 @@ const useStyles = createStyles(({ css, token }) => {
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      height: 67.2px; // 固定描述文本高度 (3行 * 22.4px)
+      flex: 1;
     `,
     footer: css`
       padding: 12px 20px;
@@ -97,6 +99,10 @@ const useStyles = createStyles(({ css, token }) => {
       display: flex;
       align-items: center;
       gap: 4px;
+      
+      .ant-icon {
+        font-size: 16px !important;
+      }
     `,
     actions: css`
       display: flex;
@@ -183,11 +189,11 @@ const PMHubPromptCard = memo<PMHubPromptCardProps>(
         <div className={styles.footer}>
           <div className={styles.stats}>
             <div className={styles.stat}>
-              <Icon icon={StarIcon} size={10} />
+              <Icon icon={StarIcon} size={16} style={{ width: '16px', height: '16px' }} />
               <span>0</span>
             </div>
             <div className={styles.stat}>
-              <Icon icon={ClockIcon} size={10} />
+              <Icon icon={ClockIcon} size={16} style={{ width: '16px', height: '16px' }} />
               <span>AI 工具</span>
             </div>
           </div>
