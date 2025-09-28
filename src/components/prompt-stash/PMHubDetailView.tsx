@@ -195,7 +195,6 @@ const PMHubDetailView = memo<PMHubDetailViewProps>(({ template, onStartChat }) =
                   label: '你可以使用该工具做什么？',
                 },
               ]}
-              variant={'outlined'}
             />
 
             {/* 标签列表 */}

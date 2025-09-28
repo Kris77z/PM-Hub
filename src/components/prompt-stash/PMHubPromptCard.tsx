@@ -189,11 +189,11 @@ const PMHubPromptCard = memo<PMHubPromptCardProps>(
         <div className={styles.footer}>
           <div className={styles.stats}>
             <div className={styles.stat}>
-              <Icon icon={StarIcon} size={16} style={{ width: '16px', height: '16px' }} />
+              <Icon icon={StarIcon} style={{ width: '16px', height: '16px' }} />
               <span>0</span>
             </div>
             <div className={styles.stat}>
-              <Icon icon={ClockIcon} size={16} style={{ width: '16px', height: '16px' }} />
+              <Icon icon={ClockIcon} style={{ width: '16px', height: '16px' }} />
               <span>AI 工具</span>
             </div>
           </div>

@@ -92,7 +92,7 @@ const Category = memo<CategoryProps>(({
                   </Tag>
                 ),
           ...item,
-          icon: <Icon icon={item.icon} size={18} />,
+          icon: <Icon icon={item.icon} size={'normal'} />,
           label: item.label,
         };
       })}
